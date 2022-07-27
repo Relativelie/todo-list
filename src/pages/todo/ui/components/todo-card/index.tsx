@@ -7,6 +7,7 @@ import * as S from './styles';
 import TodoComponentsTodoCardBottomBar from '../todo-card-bottom-bar';
 import { setFilteredTasks, toCompleteTask } from '../../../store/task/slice';
 import TodoComponentsTodoCardInput from '../todo-card-input';
+import { common } from '@mui/material/colors';
 
 const TodoComponentsTodoCard = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const TodoComponentsTodoCard = () => {
                 fontSize={18}
                 sx={{ textDecoration: 'line-through' }}
                 variant="body1"
-                color="#7a7a7a"
+                color="light"
               >
                 {filteredTasks[key].title}
               </Typography>

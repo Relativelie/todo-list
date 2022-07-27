@@ -8,7 +8,7 @@ const PagesTodoMain = () => {
 
   return (
     <S.Container>
-      <Typography variant="h1" component="div" color="#db555560">
+      <Typography variant="h1" component="div" color="warning.main">
         {t('todo.title')}
       </Typography>
       <TodoComponentsTodoCard />

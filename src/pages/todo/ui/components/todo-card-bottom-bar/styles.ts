@@ -1,20 +1,22 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
+  ${(props) => {
+    return `box-shadow: inset 0 -8px 4px 4px ${props.theme.palette.default},
+      inset 0 0.5px 2px 0px ${props.theme.palette.light};`;
+  }}
   display: grid;
   grid-template-columns: 130px 1fr 1fr;
   grid-template-areas: "count btnGroup removeBtn";
   justify-items: flex-end;
   align-items: center;
   padding: 10px;
-  box-shadow: inset 0 -8px 4px 4px rgb(255, 255, 255),
-    inset 0 0.5px 2px 0px #7a7a7a;
 `;
 
 export const BtnContainer = styled.div<{ isActive?: boolean }>`
   ${(props) => {
     if (props.isActive !== undefined) {
-      return 'border: solid 1px #db555560; border-radius: 5px;';
+      return `border: solid 1px ${props.theme.palette.warning.main}; border-radius: 5px;`;
     }
   }}
   padding: 3px 5px;

@@ -1,16 +1,20 @@
 import styled from '@emotion/styled';
 
 export const CardContainer = styled.div`
+  ${(props) => {
+    return `box-shadow: 0 0 5px ${props.theme.palette.light};`;
+  }}
   width: 600px;
-  box-shadow: 0 0 5px #7a7a7a;
   background-color: #ffff;
 `;
 
 export const CircleContainer = styled.div`
+${(props) => {
+  return `border: solid 0.1px ${props.theme.palette.light};`;
+}}
   width: 24px;
   height: 24px;
   padding: 3px;
-  border: solid 1px #7a7a7a60;
   border-radius: 50%;
   margin-right: 15px;
 `;
