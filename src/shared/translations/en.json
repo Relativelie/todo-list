@@ -1,0 +1,15 @@
+{
+    "todo": {
+      "title": "todos",
+      "inputPlaceholder": "What needs to be done?",
+      "remained": "items left",
+      "btn": {
+        "all": "All",
+        "active": "Active",
+        "completed": "Completed",
+        "clearCompleted": "Clear completed"
+      }
+
+    }
+  }
+  

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -13,7 +13,15 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "commonjs",
+    "baseUrl": "./",                          /* Base directory to resolve non-absolute module names. */
+    "paths": {
+      "@shared/*": ["./src/shared/*"],
+      "@shared/": ["./src/shared/"],
+      // "@entities/*": ["./src/entities"],
+      // "@pages/*": ["./src/pages"],
+      // "@store/*": ["./src/store/*"],
+    },
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
