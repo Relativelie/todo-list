@@ -14,9 +14,7 @@ function App() {
           body {
             display: flex;
             justify-content: center;
-            background: #e0dff;
-            min-height: "100vh";
-            max-width: "100vw";
+            background-color: #c6c6c6bd;
           }
         `}
       />

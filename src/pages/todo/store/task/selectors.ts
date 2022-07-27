@@ -11,3 +11,7 @@ export const filteredTasksSelector = createSelector(
   (state) => state.todo.task.filteredTasks,
 );
 
+export const activeFilterSelector = createSelector(
+  todoStateSelector,
+  (state) => state.todo.task.activeFilter,
+);

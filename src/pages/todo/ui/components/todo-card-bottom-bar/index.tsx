@@ -6,33 +6,43 @@ import {
   removeCompletedTasks,
   setFilteredTasks,
 } from '../../../store/task/slice';
-import { tasksSelector } from '../../../store/task/selectors';
+import {
+  tasksSelector,
+  activeFilterSelector,
+} from '../../../store/task/selectors';
 import * as S from './styles';
 
 const TodoComponentsTodoCardBottomBar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelector);
+  const selectedFilter = useSelector(activeFilterSelector);
 
   const btn = useCallback(
     (title: string, action: 'all' | 'active' | 'completed' | 'remove') => {
       let onClick: () => void;
+      let isActive;
       if (action === 'remove') {
         onClick = () => {
           dispatch(removeCompletedTasks());
           dispatch(setFilteredTasks());
         };
-      } else onClick = () => dispatch(setFilteredTasks(action));
+      } else {
+        onClick = () => dispatch(setFilteredTasks(action));
+        if (selectedFilter === action) {
+          isActive = true;
+        }
+      }
 
       return (
-        <S.BtnContainer onClick={onClick}>
+        <S.BtnContainer isActive={isActive} onClick={onClick}>
           <Typography variant="caption" color="#7a7a7a" fontSize={14}>
             {title}
           </Typography>
         </S.BtnContainer>
       );
     },
-    [],
+    [selectedFilter],
   );
 
   const activeTasksCount = useMemo(() => {
@@ -58,13 +68,13 @@ const TodoComponentsTodoCardBottomBar = () => {
 
   return (
     <S.Container>
-      {activeTasksCount}
+      <S.CountContainer>{activeTasksCount}</S.CountContainer>
       <S.BtnGroup>
         {btn(t('todo.btn.all'), 'all')}
         {btn(t('todo.btn.active'), 'active')}
         {btn(t('todo.btn.completed'), 'completed')}
       </S.BtnGroup>
-      {btn(t('todo.btn.clearCompleted'), 'remove')}
+      <S.RemoveBtn>{btn(t('todo.btn.clearCompleted'), 'remove')}</S.RemoveBtn>
     </S.Container>
   );
 };
