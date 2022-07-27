@@ -4,17 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
-import { filteredTasksSelector, isActiveFilterSelector } from '../../../store/task/selectors';
+import { filteredTasksSelector } from '../../../store/task/selectors';
 import * as S from './styles';
 import TodoComponentsTodoCardBottomBar from '../todo-card-bottom-bar';
-import { addTask, setFilteredTasks } from '../../../store/task/slice';
+import { addTask, setFilteredTasks, toCompleteTask } from '../../../store/task/slice';
 
 const TodoComponentsTodoCard = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const textInput = useRef<HTMLInputElement>(null);
   const filteredTasks = useSelector(filteredTasksSelector);
-  const activeFilter = useSelector(isActiveFilterSelector);
 
   const completedTask = useCallback((title: string, index: string) => {
     return (
@@ -31,7 +30,7 @@ const TodoComponentsTodoCard = () => {
 
   const activeTask = useCallback((title: string, index: string) => {
     return (
-      <S.TaskContainer key={index}>
+      <S.TaskContainer key={index} onClick={() => taskPressed(Number(index))}>
         <S.CircleContainer />
         <Typography fontWeight={300} fontSize={18} variant="body1" gutterBottom>
           {title}
@@ -40,11 +39,16 @@ const TodoComponentsTodoCard = () => {
     );
   }, []);
 
+  const taskPressed = (index: number) => {
+    dispatch(toCompleteTask(index));
+    dispatch(setFilteredTasks());
+  };
+
   const isEnterPressed = (e:KeyboardEvent) => {
     if (e.key === 'Enter') {
         const target = e.target as HTMLInputElement;
         dispatch(addTask(target.value));
-        dispatch(setFilteredTasks(activeFilter));
+        dispatch(setFilteredTasks());
         if (textInput.current !== null) {
             textInput.current.value = '';
         }

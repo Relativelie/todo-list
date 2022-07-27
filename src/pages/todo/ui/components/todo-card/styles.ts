@@ -24,6 +24,7 @@ export const CircleContainer = styled.div`
 export const TaskContainer = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const TasksContainer = styled.div`

@@ -9,11 +9,11 @@ export type State = {
 
 type Reducers = {
   addTask: (state: State, action: PayloadAction<string>) => void;
-  completedTask: (state: State, action: PayloadAction<number>) => void;
+  toCompleteTask: (state: State, action: PayloadAction<number>) => void;
   removeCompletedTasks: (state: State) => void;
   setFilteredTasks: (
     state: State,
-    action: PayloadAction<'all' | 'active' | 'completed'>
+    action: PayloadAction<'all' | 'active' | 'completed' | undefined>
   ) => void;
 };
 const taskSlice = createSlice<State, Reducers>({
@@ -35,7 +35,7 @@ const taskSlice = createSlice<State, Reducers>({
       const curId = state.lastTaskId;
       state.lastTaskId = curId + 1;
     },
-    completedTask(state, action) {
+    toCompleteTask(state, action) {
       const allTasks = { ...state.tasks };
       allTasks[action.payload].status = 'completed';
       state.tasks = allTasks;
@@ -51,15 +51,16 @@ const taskSlice = createSlice<State, Reducers>({
     },
     setFilteredTasks(state, action) {
       const allTasks = { ...state.tasks };
-      if (action.payload !== 'all') {
+      const filter = action.payload === undefined ? state.activeFilter : action.payload;
+      if (filter !== 'all') {
         Object.keys(allTasks).forEach((key) => {
-            if (allTasks[key].status !== action.payload) {
-              delete allTasks[key];
-            }
-          });
+          if (allTasks[key].status !== filter) {
+            delete allTasks[key];
+          }
+        });
       }
       state.filteredTasks = { ...allTasks };
-      state.activeFilter = action.payload;
+      state.activeFilter = filter;
     },
   },
 });
@@ -67,7 +68,7 @@ const taskSlice = createSlice<State, Reducers>({
 const taskReducer = taskSlice.reducer;
 export const {
   addTask,
-  completedTask,
+  toCompleteTask,
   removeCompletedTasks,
   setFilteredTasks,
 } = taskSlice.actions;
