@@ -35,3 +35,8 @@ export const TasksContainer = styled.div`
   margin-bottom: 15px;
   overflow: auto;
 `;
+
+export const EmptyTasksContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;

@@ -1,10 +1,10 @@
 import { createTheme } from '@mui/material';
 
 export const colors = {
-    light: '#7a7a7a',
-    default: '#FFFFFF',
-    warning: '#db555560',
-  };
+  light: '#7a7a7a',
+  default: '#FFFFFF',
+  warning: '#db555560',
+};
 
 export const theme = createTheme({
   palette: {
@@ -14,9 +14,9 @@ export const theme = createTheme({
   },
   components: {
     MuiTypography: {
-        defaultProps: {
-            fontWeight: 300,
-          },
+      defaultProps: {
+        fontWeight: 300,
+      },
     },
   },
 });

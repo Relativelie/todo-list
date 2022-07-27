@@ -8,7 +8,8 @@
         "active": "Active",
         "completed": "Completed",
         "clearCompleted": "Clear completed"
-      }
+      },
+      "emptyList": "List is empty"
     }
   }
   
