@@ -46,7 +46,7 @@ const config: Configuration = {
         alias: {
             "@shared": path.resolve(__dirname, './src/shared/'),
             // "@entities": path.resolve(__dirname, './src/entities/'),
-            // "@pages": path.resolve(__dirname, './src/pages/'),
+            "@pages": path.resolve(__dirname, './src/pages/'),
             // "@store": path.resolve(__dirname, './src/store/'),
           },
         extensions: [".tsx", ".ts", ".js"],

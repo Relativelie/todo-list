@@ -18,9 +18,7 @@
     "paths": {
       "@shared/*": ["./src/shared/*"],
       "@shared/": ["./src/shared/"],
-      // "@entities/*": ["./src/entities"],
-      // "@pages/*": ["./src/pages"],
-      // "@store/*": ["./src/store/*"],
+      "@pages/*": ["./src/pages"],
     },
     "moduleResolution": "node",
     "resolveJsonModule": true,

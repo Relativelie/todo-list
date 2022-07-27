@@ -4,7 +4,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { en } from '@shared/';
 import App from './app/App';
-// import { en } from './shared';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

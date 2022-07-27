@@ -1,0 +1,7 @@
+import { createSelector } from '@reduxjs/toolkit';
+import { todoStateSelector } from '../selectors';
+
+export const tasksSelector = createSelector(
+    todoStateSelector,
+    (state) => state.todo.task.tasks,
+  );

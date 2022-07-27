@@ -1,10 +1,26 @@
-import Button from '@mui/material/Button';
+import { css, Global } from '@emotion/react';
+import { PagesTodoMain } from '@pages/';
+import { setupStore } from '@shared/';
+import { Provider } from 'react-redux';
+
+const store = setupStore();
 
 function App() {
   return (
-    <div className="App">
-<Button variant="text">Text</Button>
-    </div>
+    <Provider store={store}>
+      <PagesTodoMain />
+      <Global
+        styles={css`
+          body {
+            display: flex;
+            justify-content: center;
+            background: #e0dff;
+            min-height: "100vh";
+            max-width: "100vw";
+          }
+        `}
+      />
+    </Provider>
   );
 }
 
