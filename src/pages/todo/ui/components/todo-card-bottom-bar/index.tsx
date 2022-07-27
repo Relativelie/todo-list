@@ -1,8 +1,7 @@
 import { Typography } from '@mui/material';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { tasksSelector } from '../../../store/task/selectors';
+import { useDispatch } from 'react-redux';
 import {
   removeCompletedTasks,
   setFilteredTasks,
@@ -11,41 +10,25 @@ import * as S from './styles';
 
 const TodoComponentsTodoCardBottomBar = () => {
   const { t } = useTranslation();
-  const content = useSelector(tasksSelector);
+  const dispatch = useDispatch();
 
-  const showAllTasks = () => {
-    setFilteredTasks(content);
-  };
+  const btn = useCallback(
+    (title: string, action: 'all' | 'active' | 'completed' | 'remove') => {
+      let onClick: () => void;
+      if (action === 'remove') {
+        onClick = () => dispatch(removeCompletedTasks());
+      } else onClick = () => dispatch(setFilteredTasks(action));
 
-  const showActiveTasks = () => {
-    const allTasks = { ...content };
-    Object.keys(allTasks).forEach((key) => {
-        if (allTasks.key.status === 'completed') {
-            delete allTasks[key];
-        }
-    });
-    setFilteredTasks(allTasks);
-  };
-
-  const showCompletedTasks = () => {
-    const allTasks = { ...content };
-    Object.keys(allTasks).forEach((key) => {
-        if (allTasks.key.status === 'active') {
-            delete allTasks[key];
-        }
-    });
-    setFilteredTasks(allTasks);
-  };
-
-  const btn = useCallback((title: string, clickAction: () => void) => {
-    return (
-      <S.BtnContainer onClick={clickAction}>
-        <Typography variant="caption" color="#7a7a7a" fontSize={14}>
-          {title}
-        </Typography>
-      </S.BtnContainer>
-    );
-  }, []);
+      return (
+        <S.BtnContainer onClick={onClick}>
+          <Typography variant="caption" color="#7a7a7a" fontSize={14}>
+            {title}
+          </Typography>
+        </S.BtnContainer>
+      );
+    },
+    [],
+  );
 
   return (
     <S.Container>
@@ -54,11 +37,11 @@ const TodoComponentsTodoCardBottomBar = () => {
       </Typography>
 
       <S.BtnGroup>
-        {btn(t('todo.btn.all'), showAllTasks)}
-        {btn(t('todo.btn.active'), showActiveTasks)}
-        {btn(t('todo.btn.completed'), showCompletedTasks)}
+        {btn(t('todo.btn.all'), 'all')}
+        {btn(t('todo.btn.active'), 'active')}
+        {btn(t('todo.btn.completed'), 'completed')}
       </S.BtnGroup>
-      {btn(t('todo.btn.clearCompleted'), removeCompletedTasks)}
+      {btn(t('todo.btn.clearCompleted'), 'remove')}
     </S.Container>
   );
 };

@@ -1,47 +1,79 @@
-import { FormControl, InputAdornment } from '@mui/material';
+import { InputAdornment, Typography } from '@mui/material';
 import ExpandMoreSharpIcon from '@mui/icons-material/ExpandMoreSharp';
 import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
-import { tasksSelector } from '../../../store/task/selectors';
+import { filteredTasksSelector, isActiveFilterSelector } from '../../../store/task/selectors';
 import * as S from './styles';
 import TodoComponentsTodoCardBottomBar from '../todo-card-bottom-bar';
+import { addTask, setFilteredTasks } from '../../../store/task/slice';
 
 const TodoComponentsTodoCard = () => {
   const { t } = useTranslation();
-  const content = useSelector(tasksSelector);
+  const dispatch = useDispatch();
+  const textInput = useRef<HTMLInputElement>(null);
+  const filteredTasks = useSelector(filteredTasksSelector);
+  const activeFilter = useSelector(isActiveFilterSelector);
 
-  const closedTaskIcon = useMemo(() => {
+  const completedTask = useCallback((title: string, index: string) => {
     return (
-      <S.CircleContainer>
-        <DoneTwoToneIcon color="success" />
-      </S.CircleContainer>
+      <S.TaskContainer key={index}>
+        <S.CircleContainer>
+          <DoneTwoToneIcon color="success" />
+        </S.CircleContainer>
+        <Typography fontSize={18} variant="body1" gutterBottom>
+          {title}
+        </Typography>
+      </S.TaskContainer>
     );
   }, []);
 
-  const openedTaskIcon = useMemo(() => {
-    return <S.CircleContainer />;
+  const activeTask = useCallback((title: string, index: string) => {
+    return (
+      <S.TaskContainer key={index}>
+        <S.CircleContainer />
+        <Typography fontWeight={300} fontSize={18} variant="body1" gutterBottom>
+          {title}
+        </Typography>
+      </S.TaskContainer>
+    );
   }, []);
+
+  const isEnterPressed = (e:KeyboardEvent) => {
+    if (e.key === 'Enter') {
+        const target = e.target as HTMLInputElement;
+        dispatch(addTask(target.value));
+        dispatch(setFilteredTasks(activeFilter));
+        if (textInput.current !== null) {
+            textInput.current.value = '';
+        }
+    }
+  };
 
   return (
     <S.CardContainer>
-      <FormControl fullWidth>
         <S.TaskInput
           disableUnderline
-          id="input-with-icon-adornment"
+          fullWidth
+          inputRef={textInput}
           placeholder={t('todo.inputPlaceholder')}
+          onKeyPress={(e) => isEnterPressed(e)}
           startAdornment={(
             <InputAdornment position="start">
               <ExpandMoreSharpIcon />
             </InputAdornment>
           )}
         />
-      </FormControl>
-      <S.TaskContainer>
-        {closedTaskIcon}
-        <p>dfvdfv</p>
-      </S.TaskContainer>
+      <S.TasksContainer>
+        {Object.keys(filteredTasks).map((key) => {
+          if (filteredTasks[key].status === 'active') {
+            return activeTask(filteredTasks[key].title, key);
+          } else {
+            return completedTask(filteredTasks[key].title, key);
+          }
+        })}
+      </S.TasksContainer>
       <TodoComponentsTodoCardBottomBar />
     </S.CardContainer>
   );

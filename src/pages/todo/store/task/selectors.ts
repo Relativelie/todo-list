@@ -2,6 +2,16 @@ import { createSelector } from '@reduxjs/toolkit';
 import { todoStateSelector } from '../selectors';
 
 export const tasksSelector = createSelector(
-    todoStateSelector,
-    (state) => state.todo.task.tasks,
-  );
+  todoStateSelector,
+  (state) => state.todo.task.tasks,
+);
+
+export const filteredTasksSelector = createSelector(
+  todoStateSelector,
+  (state) => state.todo.task.filteredTasks,
+);
+
+export const isActiveFilterSelector = createSelector(
+  todoStateSelector,
+  (state) => state.todo.task.activeFilter,
+);

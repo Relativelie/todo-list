@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { Input } from '@mui/material';
+import styled from "@emotion/styled";
+import { Input } from "@mui/material";
 
 export const CardContainer = styled.div`
   width: 600px;
@@ -24,4 +24,11 @@ export const CircleContainer = styled.div`
 export const TaskContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const TasksContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0 15px 5px;
 `;
