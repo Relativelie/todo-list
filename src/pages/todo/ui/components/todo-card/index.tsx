@@ -2,13 +2,13 @@ import { Typography } from '@mui/material';
 import { ReactNode, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
-import { common } from '@mui/material/colors';
+import { useTranslation } from 'react-i18next';
+
 import { filteredTasksSelector } from '../../../store/task/selectors';
-import * as S from './styles';
 import TodoComponentsTodoCardBottomBar from '../todo-card-bottom-bar';
 import { setFilteredTasks, toCompleteTask } from '../../../store/task/slice';
 import TodoComponentsTodoCardInput from '../todo-card-input';
-import { useTranslation } from 'react-i18next';
+import * as S from './styles';
 
 const TodoComponentsTodoCard = () => {
   const dispatch = useDispatch();
@@ -69,11 +69,7 @@ const TodoComponentsTodoCard = () => {
         })}
         {Object.keys(filteredTasks).length === 0 && (
           <S.EmptyTasksContainer>
-            <Typography
-              fontSize={18}
-              variant="body1"
-              color="light"
-            >
+            <Typography fontSize={18} variant="body1" color="light">
               {t('todo.emptyList')}
             </Typography>
           </S.EmptyTasksContainer>

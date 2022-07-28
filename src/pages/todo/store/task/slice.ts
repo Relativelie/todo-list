@@ -1,8 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type State = {
-  tasks: { [key: string]: any };
-  filteredTasks: { [key: string]: any };
+  tasks: {
+    [key: string]: {
+      status: string;
+      title: string;
+    };
+  };
+  filteredTasks: {
+    [key: string]: {
+      status: string;
+      title: string;
+    };
+  };
   lastTaskId: number;
   activeFilter: 'all' | 'active' | 'completed';
 };
