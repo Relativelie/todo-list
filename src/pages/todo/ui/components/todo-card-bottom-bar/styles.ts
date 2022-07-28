@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  ${(props) => {
-    return `box-shadow: inset 0 -8px 4px 4px ${props.theme.palette.default},
-      inset 0 0.5px 2px 0px ${props.theme.palette.light};`;
+  ${(props: any) => {
+    return `box-shadow: inset 0 -8px 4px 4px ${props.theme.palette.secondary.main},
+      inset 0 0.5px 2px 0px ${props.theme.palette.secondary.light};`;
   }}
   display: grid;
   grid-template-columns: 130px 1fr 1fr;
@@ -14,7 +14,7 @@ export const Container = styled.div`
 `;
 
 export const BtnContainer = styled.div<{ isActive?: boolean }>`
-  ${(props) => {
+  ${(props: any) => {
     if (props.isActive !== undefined) {
       return `border: solid 1px ${props.theme.palette.warning.main}; border-radius: 5px;`;
     }

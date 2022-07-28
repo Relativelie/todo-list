@@ -37,7 +37,7 @@ const TodoComponentsTodoCardBottomBar = () => {
 
       return (
         <S.BtnContainer isActive={isActive} onClick={onClick}>
-          <Typography variant="caption" color="light" fontSize={14}>
+          <Typography variant="caption" color="secondary.light" fontSize={14}>
             {title}
           </Typography>
         </S.BtnContainer>
@@ -61,7 +61,7 @@ const TodoComponentsTodoCardBottomBar = () => {
       return null;
     }
     return (
-      <Typography variant="caption" color="light" fontSize={14}>
+      <Typography variant="caption" color="secondary.light" fontSize={14}>
         {`${count} ${t('todo.remained')}`}
       </Typography>
     );

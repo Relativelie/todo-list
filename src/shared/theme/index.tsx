@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material';
+import { createTheme, Theme } from '@mui/material';
 
 export const colors = {
   light: '#7a7a7a',
@@ -6,11 +6,10 @@ export const colors = {
   warning: '#db555560',
 };
 
-export const theme = createTheme({
+export const theme: Theme = createTheme({
   palette: {
     warning: { main: colors.warning },
-    light: colors.light,
-    default: colors.default,
+    secondary: { main: colors.default, light: colors.light },
   },
   components: {
     MuiTypography: {

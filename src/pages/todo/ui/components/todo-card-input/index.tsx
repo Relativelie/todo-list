@@ -1,6 +1,6 @@
 import { InputAdornment } from '@mui/material';
 import ExpandMoreSharpIcon from '@mui/icons-material/ExpandMoreSharp';
-import { useRef } from 'react';
+import { KeyboardEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ const TodoComponentsTodoCardInput = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const isEnterPressed = (e: KeyboardEvent) => {
+  const isEnterPressed = (e: KeyboardEvent<HTMLDivElement>) => {
     const target = e.target as HTMLInputElement;
     if (e.key === 'Enter' && target.value.trim().length !== 0) {
       dispatch(addTask(target.value));
@@ -30,6 +30,8 @@ const TodoComponentsTodoCardInput = () => {
       inputRef={textInput}
       placeholder={t('todo.inputPlaceholder')}
       onKeyPress={(e) => isEnterPressed(e)}
+      inputProps={{ 'data-testid': 'task-input' }}
+      data-testid="task-input-click"
       startAdornment={(
         <InputAdornment position="start">
           <ExpandMoreSharpIcon />

@@ -59,7 +59,7 @@ const TodoComponentsTodoCard = () => {
                 fontSize={18}
                 sx={{ textDecoration: 'line-through' }}
                 variant="body1"
-                color="light"
+                color="secondary.light"
               >
                 {filteredTasks[key].title}
               </Typography>
@@ -69,7 +69,7 @@ const TodoComponentsTodoCard = () => {
         })}
         {Object.keys(filteredTasks).length === 0 && (
           <S.EmptyTasksContainer>
-            <Typography fontSize={18} variant="body1" color="light">
+            <Typography fontSize={18} variant="body1" color="secondary.light">
               {t('todo.emptyList')}
             </Typography>
           </S.EmptyTasksContainer>
