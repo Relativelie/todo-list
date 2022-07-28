@@ -3,7 +3,6 @@ import { ReactNode, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 import { useTranslation } from 'react-i18next';
-
 import { filteredTasksSelector } from '../../../store/task/selectors';
 import TodoComponentsTodoCardBottomBar from '../todo-card-bottom-bar';
 import { setFilteredTasks, toCompleteTask } from '../../../store/task/slice';
